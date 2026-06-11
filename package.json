@@ -1,0 +1,10 @@
+{
+  "name": "scribe-ai-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "install-all": "npm install --prefix backend && npm install --prefix frontend/scribe_ai",
+    "build-frontend": "npm run build --prefix frontend/scribe_ai",
+    "build": "npm install --prefix backend && npm install --prefix frontend/scribe_ai && npm run build --prefix frontend/scribe_ai",
+    "start": "npm start --prefix backend"
+  }
+}

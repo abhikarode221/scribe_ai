@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, BarChart3, Zap } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/posts', {
+    axios.get(`${API_BASE_URL}/api/posts`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }

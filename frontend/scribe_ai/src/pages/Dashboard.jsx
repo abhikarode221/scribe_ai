@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BarChart3, Users, DollarSign, TrendingUp, Heart, MessageSquare, Award, Plus } from "lucide-react";
 import axios from "axios";
+import { API_BASE_URL } from "../config";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -21,7 +22,7 @@ export default function Dashboard() {
   // ✅ FETCH ONLY CURRENT USER POSTS (SECURE & OPTIMIZED)
   const fetchUserPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/posts/mine", {
+      const res = await axios.get(`${API_BASE_URL}/api/posts/mine`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +68,7 @@ export default function Dashboard() {
       if (!confirmDelete) return;
 
       await axios.delete(
-        `http://localhost:5000/api/posts/${id}`,
+        `${API_BASE_URL}/api/posts/${id}`,
         {
           data: { author: userId },
           headers: {

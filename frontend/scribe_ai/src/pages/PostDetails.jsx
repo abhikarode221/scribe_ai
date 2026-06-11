@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, MessageSquare, Send, Calendar, User, ArrowLeft, Zap, Loader2 } from 'lucide-react';
 
@@ -17,7 +18,7 @@ export default function PostDetails() {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/posts/${slug}`, {
+    axios.get(`${API_BASE_URL}/api/posts/${slug}`, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token ? `Bearer ${token}` : ""
@@ -56,7 +57,7 @@ export default function PostDetails() {
     setTimeout(() => setClapAnim(false), 600);
 
     try {
-      await axios.put(`http://localhost:5000/api/posts/${post._id}/clap`);
+      await axios.put(`${API_BASE_URL}/api/posts/${post._id}/clap`);
     } catch (err) {
       console.error("Failed to sync claps with server:", err);
     }
@@ -70,7 +71,7 @@ export default function PostDetails() {
     setCommentLoading(true);
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/posts/${post._id}/comment`,
+        `${API_BASE_URL}/api/posts/${post._id}/comment`,
         { text: commentText },
         {
           headers: {

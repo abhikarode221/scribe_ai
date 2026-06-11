@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Sparkles, Save, Loader2, Wand2, Copy, Check, FileText, Bold, Italic, Heading, Quote, List, ListOrdered, Code, Link2, Image } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -52,7 +53,7 @@ export default function Editor() {
       try {
 
         const res = await axios.get(
-          `http://localhost:5000/api/posts/edit/${id}`
+          `${API_BASE_URL}/api/posts/edit/${id}`
         );
 
         const post = res.data;
@@ -164,7 +165,7 @@ export default function Editor() {
     try {
 
       const res = await axios.post(
-        'http://localhost:5000/api/upload',
+        `${API_BASE_URL}/api/upload`,
         formData,
         {
           headers: {
@@ -233,7 +234,7 @@ export default function Editor() {
         }
 
         await axios.put(
-          `http://localhost:5000/api/posts/${id}`,
+          `${API_BASE_URL}/api/posts/${id}`,
           postData,
           {
             headers: {
@@ -250,7 +251,7 @@ export default function Editor() {
       else {
 
         await axios.post(
-          'http://localhost:5000/api/posts',
+          `${API_BASE_URL}/api/posts`,
           postData,
           {
             headers: {
@@ -295,7 +296,7 @@ export default function Editor() {
     try {
 
       const res = await axios.post(
-        'http://localhost:5000/api/ai/audit',
+        `${API_BASE_URL}/api/ai/audit`,
         { content },
         {
           headers: {
@@ -326,7 +327,7 @@ export default function Editor() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/ai/transform",
+        `${API_BASE_URL}/api/ai/transform`,
         { text: hookTopic, task: "draft" },
         {
           headers: {
@@ -349,7 +350,7 @@ export default function Editor() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/ai/transform",
+        `${API_BASE_URL}/api/ai/transform`,
         { text: toneInput, task: "tone", option: selectedTone },
         {
           headers: {
@@ -374,7 +375,7 @@ export default function Editor() {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/ai/transform",
+        `${API_BASE_URL}/api/ai/transform`,
         { text: content, task: "social" },
         {
           headers: {

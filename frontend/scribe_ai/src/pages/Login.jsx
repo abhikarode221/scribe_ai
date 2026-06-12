@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
-import { API_BASE_URL } from '../config';
+import api from '../api';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LogIn } from 'lucide-react';
@@ -12,7 +11,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, form);
+      const res = await api.post('/api/auth/login', form);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', res.data.email);
       localStorage.setItem('userId', res.data.id);

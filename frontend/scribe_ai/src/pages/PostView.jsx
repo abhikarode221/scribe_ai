@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import axios from 'axios';
-import { API_BASE_URL } from '../config';
+import api from '../api';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
@@ -12,7 +11,7 @@ export default function PostView() {
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios.get(`${API_BASE_URL}/api/posts/${slug}`)
+    api.get(`/api/posts/${slug}`)
       .then(res => setPost(res.data))
       .catch(err => console.error(err));
   }, [slug]);

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Sparkles, Save, Loader2, Wand2, Copy, Check, FileText, Bold, Italic, Heading, Quote, List, ListOrdered, Code, Link2, Image } from 'lucide-react';
-import axios from 'axios';
-import { API_BASE_URL } from '../config';
+import api from '../api';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -52,8 +51,8 @@ export default function Editor() {
 
       try {
 
-        const res = await axios.get(
-          `${API_BASE_URL}/api/posts/edit/${id}`
+        const res = await api.get(
+          `/api/posts/edit/${id}`
         );
 
         const post = res.data;
@@ -164,8 +163,8 @@ export default function Editor() {
 
     try {
 
-      const res = await axios.post(
-        `${API_BASE_URL}/api/upload`,
+      const res = await api.post(
+        `/api/upload`,
         formData,
         {
           headers: {
@@ -233,8 +232,8 @@ export default function Editor() {
           return;
         }
 
-        await axios.put(
-          `${API_BASE_URL}/api/posts/${id}`,
+        await api.put(
+          `/api/posts/${id}`,
           postData,
           {
             headers: {
@@ -250,8 +249,8 @@ export default function Editor() {
       // ✅ CREATE NEW POST
       else {
 
-        await axios.post(
-          `${API_BASE_URL}/api/posts`,
+        await api.post(
+          `/api/posts`,
           postData,
           {
             headers: {
@@ -295,8 +294,8 @@ export default function Editor() {
 
     try {
 
-      const res = await axios.post(
-        `${API_BASE_URL}/api/ai/audit`,
+      const res = await api.post(
+        `/api/ai/audit`,
         { content },
         {
           headers: {
@@ -326,8 +325,8 @@ export default function Editor() {
     if (!hookTopic) return alert("Please specify a topic or title!");
     setLoading(true);
     try {
-      const res = await axios.post(
-        `${API_BASE_URL}/api/ai/transform`,
+      const res = await api.post(
+        `/api/ai/transform`,
         { text: hookTopic, task: "draft" },
         {
           headers: {
@@ -349,8 +348,8 @@ export default function Editor() {
     if (!toneInput) return alert("Please enter some text to transform!");
     setLoading(true);
     try {
-      const res = await axios.post(
-        `${API_BASE_URL}/api/ai/transform`,
+      const res = await api.post(
+        `/api/ai/transform`,
         { text: toneInput, task: "tone", option: selectedTone },
         {
           headers: {
@@ -374,8 +373,8 @@ export default function Editor() {
     }
     setLoading(true);
     try {
-      const res = await axios.post(
-        `${API_BASE_URL}/api/ai/transform`,
+      const res = await api.post(
+        `/api/ai/transform`,
         { text: content, task: "social" },
         {
           headers: {
